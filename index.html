@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiabetProtect — Контроль и профилактика</title>
+    <meta name="description" content="Информационный портал DiabetProtect: всё о современном подходе к контролю уровня сахара, правильном питании и активном образе жизни.">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 28px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            color: #0f172a;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .features {
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #f1f5f9;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .info-section {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .info-section h2 {
+            margin-bottom: 16px;
+        }
+
+        .info-section p {
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero { padding: 50px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <span class="logo-icon">⚕️</span>
+                DiabetProtect
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Умный подход к вашему здоровью</h1>
+            <p>Информационно-консультационный проект DiabetProtect. Мы собираем актуальные научные данные о профилактике, питании и образе жизни для поддержания оптимального уровня сахара.</p>
+            <a href="#about" class="btn">Узнать больше</a>
+        </div>
+    </section>
+
+    <section class="features container" id="about">
+        <h2 style="text-align: center; font-size: 32px; color: #0f172a;">Основы контроля</h2>
+        <div class="features-grid">
+            <div class="card">
+                <div class="card-icon">🥗</div>
+                <h3>Сбалансированное питание</h3>
+                <p>Узнайте, как правильно составлять рацион, рассчитывать гликемический индекс продуктов и избегать скрытых сахаров в повседневной еде.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏃‍♂️</div>
+                <h3>Активный образ жизни</h3>
+                <p>Физические нагрузки повышают чувствительность клеток к инсулину. Подборки безопасных и эффективных упражнений на каждый день.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🩸</div>
+                <h3>Регулярный мониторинг</h3>
+                <p>Современные технологии и методики измерения. Как вести дневник самоконтроля и правильно интерпретировать показатели.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="container">
+            <h2>Знание — лучшая профилактика</h2>
+            <p>Проект DiabetProtect носит исключительно информационный характер. Вся представленная информация собрана из открытых медицинских источников. Помните: при любых изменениях самочувствия необходимо проконсультироваться с лечащим врачом.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DiabetProtect. Все права защищены.</p>
+            <p style="margin-top: 8px;">Информация на сайте не является медицинской рекомендацией.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
