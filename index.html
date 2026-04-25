@@ -3,223 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiabetProtect — Контроль и профилактика</title>
-    <meta name="description" content="Информационный портал DiabetProtect: всё о современном подходе к контролю уровня сахара, правильном питании и активном образе жизни.">
+    <title>NovaGuard | Система мониторинга глюкозы нового поколения</title>
+    <meta name="description" content="Инновационное устройство для непрерывного контроля сахара в крови. Без проколов. Синхронизация со смартфоном 24/7.">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #10b981;
-            --text-main: #334155;
-            --text-light: #64748b;
-            --bg-main: #f8fafc;
-            --bg-card: #ffffff;
+            --bg-color: #000000;
+            --text-main: #f5f5f7;
+            --text-muted: #86868b;
+            --accent: #2997ff;
+            --accent-hover: #147ce5;
+            --section-light: #f5f5f7;
+            --text-dark: #1d1d1f;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-main);
+            background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        header {
-            background-color: var(--bg-card);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: sticky;
+        /* Навигация в стиле Apple (полупрозрачная с блюром) */
+        nav {
+            position: fixed;
             top: 0;
-            z-index: 100;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav-wrapper {
+            width: 100%;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            z-index: 9999;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            height: 70px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: #e5e5ea;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 12px;
+            letter-spacing: -0.01em;
+            transition: color 0.3s;
         }
 
-        .logo-icon {
-            color: var(--secondary);
-            font-size: 28px;
+        .nav-links a:hover { color: #ffffff; }
+
+        /* Анимация появления */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        .animate {
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        /* Главный экран (Hero) */
         .hero {
-            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
-            padding: 80px 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 0 20px;
+            position: relative;
+            background: radial-gradient(circle at center, #1a1a1c 0%, #000000 100%);
         }
 
-        .hero h1 {
-            font-size: 42px;
-            color: #0f172a;
+        .hero-title {
+            font-size: 86px;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            line-height: 1.05;
             margin-bottom: 20px;
-            line-height: 1.2;
+            background: linear-gradient(90deg, #fff, #86868b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
-            font-size: 18px;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto 30px auto;
+        .hero-subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 40px;
+            letter-spacing: -0.01em;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
         }
 
         .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 8px;
+            padding: 14px 28px;
+            border-radius: 980px;
+            font-size: 17px;
+            font-weight: 400;
             text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #e5e5ea;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: #fff;
+        }
+
+        /* Секция с картинкой */
+        .device-showcase {
+            width: 100%;
+            height: 80vh;
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 100px;
+        }
+
+        .device-showcase::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.9) 100%);
+            z-index: 1;
+        }
+
+        .showcase-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .showcase-text h2 {
+            font-size: 56px;
             font-weight: 600;
-            transition: background-color 0.3s;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
         }
 
-        .btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .features {
-            padding: 80px 0;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-            border: 1px solid #f1f5f9;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            color: #0f172a;
-        }
-
-        .info-section {
-            background-color: var(--primary);
-            color: white;
-            padding: 60px 0;
+        /* Светлая секция (Приложение) */
+        .feature-light {
+            background-color: var(--section-light);
+            color: var(--text-dark);
+            padding: 150px 20px;
             text-align: center;
         }
 
-        .info-section h2 {
-            margin-bottom: 16px;
+        .feature-light h2 {
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #1d1d1f, #86868b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .info-section p {
-            opacity: 0.9;
-            max-width: 700px;
+        .feature-light p {
+            font-size: 24px;
+            color: #86868b;
+            max-width: 600px;
+            margin: 0 auto 60px auto;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1200px;
             margin: 0 auto;
+            gap: 40px;
+            text-align: left;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+        }
+
+        .feature-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 17px;
+            color: #86868b;
+            margin-bottom: 0;
         }
 
         footer {
-            background-color: #0f172a;
-            color: #94a3b8;
-            padding: 40px 0;
+            background-color: #000;
+            padding: 40px 20px;
             text-align: center;
-            font-size: 14px;
+            color: #86868b;
+            font-size: 12px;
+            border-top: 1px solid #333;
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .hero { padding: 50px 0; }
+            .hero-title { font-size: 48px; }
+            .hero-subtitle { font-size: 20px; }
+            .showcase-text h2 { font-size: 36px; }
+            .feature-light h2 { font-size: 42px; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .nav-links { gap: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container nav-wrapper">
-            <a href="#" class="logo">
-                <span class="logo-icon">⚕️</span>
-                DiabetProtect
-            </a>
+    <nav>
+        <div class="nav-links">
+            <a href="#" style="font-weight: 600; color: #fff;">NovaGuard</a>
+            <a href="#">Сенсор</a>
+            <a href="#">Приложение</a>
+            <a href="#">Терапия</a>
         </div>
-    </header>
+    </nav>
 
     <section class="hero">
-        <div class="container">
-            <h1>Умный подход к вашему здоровью</h1>
-            <p>Информационно-консультационный проект DiabetProtect. Мы собираем актуальные научные данные о профилактике, питании и образе жизни для поддержания оптимального уровня сахара.</p>
-            <a href="#about" class="btn">Узнать больше</a>
+        <h1 class="hero-title animate">Абсолютный контроль.<br>Без проколов.</h1>
+        <p class="hero-subtitle animate delay-1">Встречайте NovaGuard CGM. Интеллектуальный мониторинг уровня сахара в крови каждую минуту. Напрямую в ваш смартфон.</p>
+        <div class="buttons animate delay-2">
+            <a href="#" class="btn btn-primary">Купить сейчас</a>
+            <a href="#" class="btn btn-secondary">Как настроить</a>
         </div>
     </section>
 
-    <section class="features container" id="about">
-        <h2 style="text-align: center; font-size: 32px; color: #0f172a;">Основы контроля</h2>
-        <div class="features-grid">
-            <div class="card">
-                <div class="card-icon">🥗</div>
-                <h3>Сбалансированное питание</h3>
-                <p>Узнайте, как правильно составлять рацион, рассчитывать гликемический индекс продуктов и избегать скрытых сахаров в повседневной еде.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🏃‍♂️</div>
-                <h3>Активный образ жизни</h3>
-                <p>Физические нагрузки повышают чувствительность клеток к инсулину. Подборки безопасных и эффективных упражнений на каждый день.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🩸</div>
-                <h3>Регулярный мониторинг</h3>
-                <p>Современные технологии и методики измерения. Как вести дневник самоконтроля и правильно интерпретировать показатели.</p>
-            </div>
+    <section class="device-showcase">
+        <div class="showcase-text">
+            <h2>Технология на грани магии.</h2>
+            <p style="font-size: 21px; color: #e5e5ea;">Микросенсор толщиной с волос. Установка за 1 секунду. Работает 14 дней без калибровки.</p>
         </div>
     </section>
 
-    <section class="info-section">
-        <div class="container">
-            <h2>Знание — лучшая профилактика</h2>
-            <p>Проект DiabetProtect носит исключительно информационный характер. Вся представленная информация собрана из открытых медицинских источников. Помните: при любых изменениях самочувствия необходимо проконсультироваться с лечащим врачом.</p>
+    <section class="feature-light">
+        <h2 class="animate">Вся клиника в кармане.</h2>
+        <p class="animate delay-1">Приложение NovaSync использует алгоритмы машинного обучения, чтобы предсказывать гипогликемию за 30 минут до её наступления.</p>
+        
+        <div class="grid-2">
+            <div class="feature-card animate delay-2">
+                <h3>Умные уведомления</h3>
+                <p>Настройте индивидуальные границы. Телефон или смарт-часы тихо завибрируют, если уровень глюкозы начнет стремительно падать или расти. Ночью работает специальный режим громкой тревоги для вашей безопасности.</p>
+            </div>
+            <div class="feature-card animate delay-2">
+                <h3>Связь с лечащим врачом</h3>
+                <p>Один клик — и полный отчет о вариабельности гликемии (TIR), графиках и дозах инсулина отправляется вашему эндокринологу в виде защищенного PDF-файла, соответствующего стандартам Минздрава.</p>
+            </div>
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 DiabetProtect. Все права защищены.</p>
-            <p style="margin-top: 8px;">Информация на сайте не является медицинской рекомендацией.</p>
-        </div>
+        <p>Имеются противопоказания. Перед использованием необходимо проконсультироваться со специалистом.</p>
+        <p style="margin-top: 10px;">&copy; 2024 NovaGuard Medical Technologies. Все права защищены.</p>
     </footer>
 
+    <script>
+        // Простой скрипт для запуска анимации при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.animation = "fadeInUp 1s forwards";
+                }
+            });
+        });
+
+        document.querySelectorAll('.feature-light h2, .feature-light p, .feature-card').forEach((el) => {
+            el.style.opacity = "0";
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
