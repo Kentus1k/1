@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaGuard | Система мониторинга глюкозы нового поколения</title>
-    <meta name="description" content="Инновационное устройство для непрерывного контроля сахара в крови. Без проколов. Синхронизация со смартфоном 24/7.">
+    <title>DiabetProtect | Настройка систем мониторинга глюкозы</title>
+    <meta name="description" content="Помощь с настройкой и активацией систем непрерывного мониторинга сахара в крови (CGM) в России. Адаптация ПО, обход региональных ограничений.">
     <style>
         :root {
             --bg-color: #000000;
@@ -30,20 +30,20 @@
             overflow-x: hidden;
         }
 
-        /* Навигация в стиле Apple (полупрозрачная с блюром) */
+        /* Навигация (Glassmorphism) */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 48px;
-            background: rgba(0, 0, 0, 0.8);
+            height: 52px;
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .nav-links {
@@ -54,30 +54,32 @@
         .nav-links a {
             color: #e5e5ea;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: -0.01em;
             transition: color 0.3s;
         }
 
         .nav-links a:hover { color: #ffffff; }
 
-        /* Анимация появления */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate {
-            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        /* Базовые классы для анимации */
+        .fade-in {
             opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        /* Главный экран (Hero) */
+        .delay-1 { transition-delay: 0.15s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.45s; }
+
+        /* Главный экран */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -85,41 +87,39 @@
             text-align: center;
             padding: 0 20px;
             position: relative;
-            background: radial-gradient(circle at center, #1a1a1c 0%, #000000 100%);
+            background: radial-gradient(circle at center top, #1a1a1c 0%, #000000 100%);
+            padding-top: 60px;
         }
 
         .hero-title {
-            font-size: 86px;
+            font-size: 82px;
             font-weight: 700;
             letter-spacing: -0.05em;
             line-height: 1.05;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #fff, #86868b);
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #fff 0%, #86868b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 400;
             color: var(--text-muted);
-            max-width: 700px;
+            max-width: 750px;
             margin-bottom: 40px;
             letter-spacing: -0.01em;
         }
 
-        .buttons {
-            display: flex;
-            gap: 15px;
-        }
-
         .btn {
-            padding: 14px 28px;
+            display: inline-block;
+            padding: 16px 32px;
             border-radius: 980px;
             font-size: 17px;
-            font-weight: 400;
+            font-weight: 500;
             text-decoration: none;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .btn-primary {
@@ -129,39 +129,72 @@
 
         .btn-primary:hover {
             background-color: #e5e5ea;
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
 
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
+        /* Секция: Решение проблем в РФ (Темная) */
+        .ru-support {
+            background-color: #000;
+            padding: 120px 20px;
+            text-align: center;
+            border-top: 1px solid #1d1d1f;
         }
 
-        .btn-secondary:hover {
-            background-color: var(--accent);
+        .ru-support h2 {
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
             color: #fff;
+        }
+
+        .ru-support p.lead {
+            font-size: 24px;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+        }
+
+        .alert-box {
+            background: rgba(41, 151, 255, 0.1);
+            border: 1px solid rgba(41, 151, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .alert-box h3 {
+            color: var(--accent);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .alert-box p {
+            font-size: 18px;
+            color: #d2d2d7;
+            line-height: 1.6;
         }
 
         /* Секция с картинкой */
         .device-showcase {
             width: 100%;
-            height: 80vh;
+            height: 70vh;
             background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             position: relative;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
-            padding-bottom: 100px;
         }
 
         .device-showcase::after {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.9) 100%);
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.9) 100%);
             z-index: 1;
         }
 
@@ -169,84 +202,125 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: 800px;
+            padding: 0 20px;
         }
 
         .showcase-text h2 {
-            font-size: 56px;
-            font-weight: 600;
-            letter-spacing: -0.03em;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        /* Светлая секция (Приложение) */
+        /* Светлая секция (Технологии) */
         .feature-light {
             background-color: var(--section-light);
             color: var(--text-dark);
-            padding: 150px 20px;
+            padding: 120px 20px;
             text-align: center;
         }
 
         .feature-light h2 {
-            font-size: 64px;
+            font-size: 56px;
             font-weight: 700;
             letter-spacing: -0.04em;
             margin-bottom: 20px;
-            background: linear-gradient(90deg, #1d1d1f, #86868b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .feature-light p {
-            font-size: 24px;
-            color: #86868b;
-            max-width: 600px;
-            margin: 0 auto 60px auto;
-        }
-
-        .grid-2 {
+        .grid-3 {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             max-width: 1200px;
-            margin: 0 auto;
-            gap: 40px;
+            margin: 60px auto 0;
+            gap: 30px;
             text-align: left;
         }
 
         .feature-card {
             background: #ffffff;
-            border-radius: 30px;
-            padding: 50px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
 
         .feature-card h3 {
-            font-size: 28px;
+            font-size: 24px;
             margin-bottom: 15px;
+            color: #1d1d1f;
         }
 
         .feature-card p {
-            font-size: 17px;
+            font-size: 16px;
             color: #86868b;
-            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* Секция: Шаги (Темная) */
+        .steps-section {
+            padding: 120px 20px;
+            background-color: #000;
+            text-align: center;
+        }
+
+        .steps-container {
+            max-width: 1000px;
+            margin: 60px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .step-row {
+            display: flex;
+            align-items: center;
+            background: #111112;
+            border-radius: 20px;
+            padding: 30px 40px;
+            text-align: left;
+        }
+
+        .step-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-right: 40px;
+            min-width: 50px;
+        }
+
+        .step-text h4 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .step-text p {
+            color: var(--text-muted);
+            font-size: 17px;
         }
 
         footer {
-            background-color: #000;
-            padding: 40px 20px;
+            background-color: #1d1d1f;
+            padding: 50px 20px;
             text-align: center;
             color: #86868b;
             font-size: 12px;
-            border-top: 1px solid #333;
+            line-height: 1.6;
         }
 
-        @media (max-width: 768px) {
-            .hero-title { font-size: 48px; }
+        @media (max-width: 900px) {
+            .hero-title { font-size: 52px; }
             .hero-subtitle { font-size: 20px; }
-            .showcase-text h2 { font-size: 36px; }
-            .feature-light h2 { font-size: 42px; }
-            .grid-2 { grid-template-columns: 1fr; }
+            .ru-support h2, .feature-light h2, .showcase-text h2 { font-size: 42px; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .step-row { flex-direction: column; text-align: center; }
+            .step-number { margin-right: 0; margin-bottom: 15px; }
             .nav-links { gap: 20px; }
+            .nav-links a:not(.brand) { display: none; } /* На мобилках скрываем ссылки, оставляем только лого */
         }
     </style>
 </head>
@@ -254,63 +328,111 @@
 
     <nav>
         <div class="nav-links">
-            <a href="#" style="font-weight: 600; color: #fff;">NovaGuard</a>
-            <a href="#">Сенсор</a>
-            <a href="#">Приложение</a>
-            <a href="#">Терапия</a>
+            <a href="#" class="brand" style="font-weight: 600; color: #fff; font-size: 15px;">DiabetProtect</a>
+            <a href="#about">О технологии</a>
+            <a href="#russia">Настройка в РФ</a>
+            <a href="#features">Возможности</a>
         </div>
     </nav>
 
     <section class="hero">
-        <h1 class="hero-title animate">Абсолютный контроль.<br>Без проколов.</h1>
-        <p class="hero-subtitle animate delay-1">Встречайте NovaGuard CGM. Интеллектуальный мониторинг уровня сахара в крови каждую минуту. Напрямую в ваш смартфон.</p>
-        <div class="buttons animate delay-2">
-            <a href="#" class="btn btn-primary">Купить сейчас</a>
-            <a href="#" class="btn btn-secondary">Как настроить</a>
+        <h1 class="hero-title fade-in">Жизнь под контролем.<br>Без ограничений.</h1>
+        <p class="hero-subtitle fade-in delay-1">Профессиональная настройка систем непрерывного мониторинга глюкозы (CGM). Помогаем активировать устройства и адаптировать ПО в условиях региональных блокировок.</p>
+        <div class="fade-in delay-2" style="margin-top: 20px;">
+            <a href="#russia" class="btn btn-primary">Узнать о настройке в РФ</a>
         </div>
     </section>
 
-    <section class="device-showcase">
-        <div class="showcase-text">
-            <h2>Технология на грани магии.</h2>
-            <p style="font-size: 21px; color: #e5e5ea;">Микросенсор толщиной с волос. Установка за 1 секунду. Работает 14 дней без калибровки.</p>
-        </div>
-    </section>
-
-    <section class="feature-light">
-        <h2 class="animate">Вся клиника в кармане.</h2>
-        <p class="animate delay-1">Приложение NovaSync использует алгоритмы машинного обучения, чтобы предсказывать гипогликемию за 30 минут до её наступления.</p>
+    <section id="russia" class="ru-support">
+        <h2 class="fade-in">Санкции не должны мешать здоровью.</h2>
+        <p class="lead fade-in delay-1">Многие производители систем CGM ограничили доступ к своим официальным приложениям на территории России. Сенсоры отказываются активироваться, а приложения удалены из магазинов. Мы решаем эту проблему.</p>
         
-        <div class="grid-2">
-            <div class="feature-card animate delay-2">
-                <h3>Умные уведомления</h3>
-                <p>Настройте индивидуальные границы. Телефон или смарт-часы тихо завибрируют, если уровень глюкозы начнет стремительно падать или расти. Ночью работает специальный режим громкой тревоги для вашей безопасности.</p>
+        <div class="alert-box fade-in delay-2">
+            <h3>Адаптация и обход блокировок</h3>
+            <p>Специалисты DiabetProtect предоставляют готовые IT-решения для безопасного использования сенсоров. Мы помогаем установить модифицированные версии приложений (для iOS и Android), настраиваем локальные серверы передачи данных и восстанавливаем функцию удаленного мониторинга для родителей и лечащих врачей (Nightscout, xDrip+ и аналоги).</p>
+        </div>
+    </section>
+
+    <section class="device-showcase fade-in">
+        <div class="showcase-text">
+            <h2>Данные каждую минуту.</h2>
+            <p style="font-size: 24px; color: #e5e5ea; font-weight: 300;">Без проколов пальцев. Без потери связи.</p>
+        </div>
+    </section>
+
+    <section id="features" class="feature-light">
+        <h2 class="fade-in">Комплексный подход.</h2>
+        
+        <div class="grid-3">
+            <div class="feature-card fade-in delay-1">
+                <h3>Установка ПО</h3>
+                <p>Безопасная установка оригинальных или пропатченных приложений на ваш смартфон. Настройка профилей для работы без привязки к геолокации.</p>
             </div>
-            <div class="feature-card animate delay-2">
-                <h3>Связь с лечащим врачом</h3>
-                <p>Один клик — и полный отчет о вариабельности гликемии (TIR), графиках и дозах инсулина отправляется вашему эндокринологу в виде защищенного PDF-файла, соответствующего стандартам Минздрава.</p>
+            <div class="feature-card fade-in delay-2">
+                <h3>Умные тревоги</h3>
+                <p>Настройка звуковых и вибрационных уведомлений при падении или резком росте сахара. Ночной режим оповещений для спокойного сна.</p>
+            </div>
+            <div class="feature-card fade-in delay-3">
+                <h3>Удаленный доступ</h3>
+                <p>Настройка облачной синхронизации. Вы сможете видеть сахара вашего ребенка со своего телефона, пока он находится в школе или детском саду.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="steps-section">
+        <h2 class="fade-in" style="font-size: 48px; margin-bottom: 20px;">Как мы работаем.</h2>
+        <p class="fade-in delay-1" style="color: var(--text-muted); font-size: 20px;">Три простых шага к стабильному мониторингу.</p>
+
+        <div class="steps-container">
+            <div class="step-row fade-in delay-1">
+                <div class="step-number">1</div>
+                <div class="step-text">
+                    <h4>Консультация и выбор ПО</h4>
+                    <p>Анализируем вашу систему (Freestyle Libre, Dexcom, Sibionics и др.) и модель смартфона. Подбираем оптимальный и безопасный алгоритм активации.</p>
+                </div>
+            </div>
+            <div class="step-row fade-in delay-2">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    <h4>Обход ограничений</h4>
+                    <p>Предоставляем инструкции по созданию зарубежных аккаунтов, настройке профилей и безопасной загрузке приложений в обход блокировок App Store и Google Play.</p>
+                </div>
+            </div>
+            <div class="step-row fade-in delay-3">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    <h4>Активация и калибровка</h4>
+                    <p>Помогаем запустить сенсор, откалибровать показания (если требуется) и настроить передачу данных врачу-эндокринологу.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>Имеются противопоказания. Перед использованием необходимо проконсультироваться со специалистом.</p>
-        <p style="margin-top: 10px;">&copy; 2024 NovaGuard Medical Technologies. Все права защищены.</p>
+        <p>DiabetProtect не продает медицинское оборудование. Мы предоставляем технические консультации по настройке программного обеспечения.</p>
+        <p>Вся информация носит ознакомительный характер. Принятие решений о терапии должно осуществляться только совместно с лечащим врачом.</p>
+        <p style="margin-top: 15px;">&copy; 2024 DiabetProtect Technology Group. Все права защищены.</p>
     </footer>
 
     <script>
-        // Простой скрипт для запуска анимации при скролле
-        const observer = new IntersectionObserver((entries) => {
+        // Скрипт для плавной анимации появления элементов при скролле
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.animation = "fadeInUp 1s forwards";
+                    entry.target.classList.add('visible');
+                    // Опционально: отключить наблюдение после срабатывания
+                    // observer.unobserve(entry.target);
                 }
             });
-        });
+        }, observerOptions);
 
-        document.querySelectorAll('.feature-light h2, .feature-light p, .feature-card').forEach((el) => {
-            el.style.opacity = "0";
+        document.querySelectorAll('.fade-in').forEach((el) => {
             observer.observe(el);
         });
     </script>
